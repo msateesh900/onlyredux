@@ -1,6 +1,22 @@
 const redux = require("redux");
+const reduxLogger = require("redux-logger");
+
 const createStore = redux.createStore;
 const combineReducers = redux.combineReducers;
+const applMiddleware = redux.applyMiddleware;
+const logger = reduxLogger.createLogger();
+
+// redux
+// 1.action,action creators
+// 2.reducer(redux.combinereducer)
+// 3.store(redux.createstore,store.subscribe(),store.dispatch(),
+// return function of store.subscribe=unsubscribe)
+// 4.Middleware
+
+// is the suggested way to extend redux with custom functionality
+// Provides a third-party extendsion point b/w dispatching an action
+// and the moment it reaches the reducer
+// use middleware for logging,crash reporting ,performing asynchronous tasks .,etc
 // actions describe what happened
 const BUY_CAKE = "BUY_CAKE";
 
@@ -98,11 +114,9 @@ const rootReducer = combineReducers({
   cake: cakeReducer,
   iceCream: icecreamReducer,
 });
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, applMiddleware(logger));
 console.log("Initial State", store.getState());
-const unsubscribe = store.subscribe(() =>
-  console.log("updated state", store.getState())
-);
+const unsubscribe = store.subscribe(() => {});
 store.dispatch(buyCake());
 store.dispatch(buyCake());
 store.dispatch(buyCake());
