@@ -1,10 +1,10 @@
 # onlyredux
 
 ### Redux
-
-<ul><li>
-Predictable state container container for javascript apps</li>
-
+```
+Redux is predictable state container for javascript apps
+```
+<ul>
 <ol><li>It is for Javascript apps</li>
 <li>It is a state container </li>
 <li>it is predictable </li>
